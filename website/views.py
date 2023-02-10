@@ -7,8 +7,13 @@ import json
 views = Blueprint('views', __name__)
 
 
+@views.route('/index')
+def index():
+    return render_template('index.html')
+
+
 @views.route('/', methods=['GET', 'POST'])
-@login_required
+
 def home():
     if request.method == 'POST': 
         note = request.form.get('note')#Gets the note from the HTML 

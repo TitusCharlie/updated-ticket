@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Averta, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --secondaryColor: rgb(0, 255, 255);
+    --bodyText: rgb(235, 235, 235);
+    --linkText: rgb(2, 108, 223);
+    --whiteText: rgb(255, 255, 255);
+    --bgColor: rgb(0, 45, 161);
+}
+
+.head {
+    background-image: linear-gradient(262deg, var(--bgColor), rgb(2, 108, 223) 55%, var(--bgColor));
+    padding: 18px 38px;           
+}
+
+.headTransparent {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 4px 0px;
+    position: fixed;
+    top: 0;
+    width: 100%; 
+    z-index: 2;      
+    padding: 18px 38px; 
+}
+
+.headTransparent .logo-svg {
+    fill: var(--linkText);
+}
+
+.logo-svg {
+    fill: var(--whiteText);
+}
+
+.ltcontent::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 4px;
+    background: var(--secondaryColor);
+    margin-top: 30px;
+}
+
+.htext {
+    color: var(--secondaryColor);
+    margin: 2px 0px;
+    display: inline;
+    line-height: 1.25;
+    font-weight: 600;
+    font-size: 46px;    
+}
+
+.bottom-40 {
+    bottom: 40px;
+}
+
+.btext {
+    margin: 2px 0px;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--bodyText);
+}
+
+.nodecor {
+    text-decoration: none;
+    transition: color 0.3s ease 0s, text-decoration 0.3s ease 0s;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.25;
+    color: var(--linkText);     
+    cursor: pointer;
+}
+
+.text-bold {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.in-border {
+    border-color:#0a0a0a;
+}
+
+.wh5 {
+    width: 15px;
+    height: 15px;
+    margin-top: 4px;
+}
+
+input,
+select {
+    border-radius: 2px !important;
+}
+
+.ptext {
+    color: rgba(38, 38, 38, 0.65);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+}
+
+.left-300 {
+    left: 300px;
+}
+
+.t-ctext {
+    text-decoration: none;
+    transition: color 0.3s ease 0s, text-decoration 0.3s ease 0s;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--linkText);
+    display: inline-block;
+}
+
+.btn {
+    background-color: var(--linkText);
+    color: var(--whiteText);
+    padding: 5px 15px;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 2.43;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn:hover,
+.btn:active {
+    background: var(--bgColor);
+    color: var(--whiteText);
+}
+
+input:hover,
+select:hover {
+    border: 2px solid var(--bgColor);
+}
+
+#main .card {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 0px;
+}
+
+@media (max-width: 426px) and (min-width: 320px) {
+    .hide {
+        display: none !important;
+    }
+
+    #main .card {
+        border: none;
+        width: 100% !important;                
+    }
+
+    #main .display {
+        padding: 0px !important;
+    }
+
+    #main {
+        margin-top: 0px !important;
+    }
+
+    .ws-100,
+    .btn {
+        width: 100% !important;        
+    } 
+    
+    .head,
+    .headTransparent {        
+        padding-left: 20px !important;
+    }
+
+    label {
+        font-size: 12px !important;
+    }
+
+    .small {
+        font-size: 14px !important;
+    }
+
+    .wh5 {
+        margin-top: 3px !important;
+    }
+
+}
+
+@media (max-width: 769px) and (min-width: 425px) {
+    .hide {
+        display: none !important;
+    }    
+    
+    .no-flex {
+        display: inline !important;        
+    }
+
+    #main .display {
+        width: 100% !important;
+    }
+
+    .wh5 {
+        margin-top: 3px !important;
+    }
+}
+
+@media (max-width: 1025px) and (min-width: 768px) {
+    #main .card {
+        width: 80% !important;
+    }
+
+    .wh5 {
+        margin-top: 3px !important;
+    }
+
+    .left-300 {
+        left: 210px !important;
+    }
+}
+
+@media (max-width: 1441px) and (min-width: 1024px) {
+    #main .card {
+        width: 60% !important;
+    }
+
+    .wh5 {
+        margin-top: 3px !important;
+    }    
+}
+
+    
