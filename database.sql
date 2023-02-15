@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@TitusCharlie 
-MoTechStore
-/
-Python-Flask-MySQL-CRUD-App
-Public
-Fork your own copy of MoTechStore/Python-Flask-MySQL-CRUD-App
-Code
-Issues
-1
-Pull requests
-Actions
-Projects
-Security
-Insights
-Python-Flask-MySQL-CRUD-App/database.sql
-@MoTechStore
-MoTechStore Flask MySQL CRUD App
-Latest commit cc8acd7 on Dec 5, 2021
- History
- 1 contributor
-70 lines (56 sloc)  1.65 KB
-
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
@@ -61,18 +31,20 @@ CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `name`, `email`, `password`) VALUES
-(23, 'motech noel', 'mosesnoel02@gmail.com', `12345`),
-(24, 'Thiago Moses', 'moses@noel.com', 12345),
-(25, 'Saratex Marie', 'moses@noel.com', 12345),
-(26, 'Kamonyo Kiiza', 'kamonyomoses@gmail.com', 12345);
+INSERT INTO `accounts` (`id`, `name`, `email`, `phone`, `password`) VALUES
+(23, 'motech noel', 'mosesnoel02@gmail.com', '+255752541568', '123456'),
+(24, 'Thiago Moses', 'moses@noel.com', '0712541669', '123456'),
+(25, 'Saratex Marie', 'moses@noel.com', '0712541669', '123456'),
+(26, 'Kamonyo Kiiza', 'kamonyomoses@gmail.com', '+255752541568', '123456');
 
 --
 -- Indexes for dumped tables
@@ -98,18 +70,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Python-Flask-MySQL-CRUD-App/database.sql at main · MoTechStore/Python-Flask-MySQL-CRUD-App
