@@ -1,30 +1,470 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
-%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/sign-in.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='img/ticketmaster-favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='img/ticketmaster-favicon-32x32.png') }}">
+    <title>Orders</title>
+</head>
+<body>
+    <!--Header Section-->
+    <nav id="hide" class="navbar navbar-expand-lg py-0">
+        <div id="navBar" class="head headTransparent pb-0 mt-0">
+            <div id="navigation" class="container-fluid d-flex justify-content-between">
+                <div class="d-flex justify-content-between w-100">          
+                  <a href="" class="navbar-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="20" class="injected-svg logo-svg" data-src="/assets/tm-logo-header.623a820a.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M125.552 5.857c-4.467 0-7.747 4.033-7.747 8.225 0 4.02 2.644 5.91 6.562 5.91 1.45 0 2.958-.344 4.327-.76l.455-2.783c-1.326.6-2.727.973-4.176.973-2.264 0-3.597-.797-3.765-2.922 0-.125-.015-.242-.015-.381v-.072-.037c.015-.92.211-1.84.57-2.682.682-1.715 1.647-2.907 3.742-2.907 1.473 0 2.241.811 2.241 2.258a5.7 5.7 0 01-.08.92h-4.851c-.313 1.059-.373 1.768-.373 2.408h8.351c.205-.992.345-1.992.345-3.016-.005-3.431-2.224-5.134-5.586-5.134zm-11.895 10.096c0-.533.088-.994.161-1.314l1.295-5.903h3.181l.549-2.57h-3.179l.879-4.01-3.809 1.234-.607 2.775h-2.57l-.551 2.57h2.562l-1.002 4.565c-.241 1.074-.455 2.098-.455 3.148 0 2.602 1.693 3.543 4.096 3.543.613 0 1.296-.182 1.911-.312l.616-2.732c-.455.189-1.1.322-1.723.322-.804.001-1.354-.513-1.354-1.316zm-14.809-5.801c0 3.383 4.601 3.594 4.601 5.772 0 1.096-1.245 1.498-2.439 1.498-1.376 0-2.38-.506-3.384-1.053l-.775 2.812c1.305.6 2.725.811 4.159.811 3.04 0 6.138-1.053 6.138-4.572 0-3.295-4.599-3.93-4.599-5.632 0-1.074 1.317-1.366 2.38-1.366 1.004 0 1.979.292 2.358.497l.776-2.651c-.703-.176-2.029-.416-3.326-.416-2.799.005-5.889 1.13-5.889 4.3zm48.113 1.315c-1.413 0-2.477-1.125-2.477-2.571 0-1.453 1.062-2.57 2.477-2.57 1.398 0 2.453 1.117 2.453 2.57 0 1.446-1.055 2.571-2.453 2.571zm-.016-5.594c-1.678 0-3.047 1.352-3.047 3.023 0 1.659 1.369 3.018 3.047 3.018 1.686 0 3.055-1.359 3.055-3.018 0-1.672-1.369-3.023-3.055-3.023zM89.004 17.43c-.9 0-1.794-.469-1.794-1.41 0-2.279 2.854-2.57 4.577-2.57h1.246c-.556 2.175-1.379 3.98-4.029 3.98zm2.469-11.564c-1.59 0-3.119.284-4.636.811l-.499 2.812c1.398-.658 2.907-1.052 4.469-1.052 1.244 0 2.717.394 2.717 1.752 0 .395 0 .79-.103 1.155h-1.237c-3.332 0-8.365.352-8.365 4.807 0 2.482 1.752 3.85 4.213 3.85 1.955 0 3.179-.854 4.387-2.381h.059l-.373 2.066h2.987c.315-2.541 1.671-7.846 1.671-9.649-.001-3.178-2.566-4.171-5.29-4.171zm54.886 2.774V7.566h.703c.367 0 .726.125.726.526 0 .46-.278.548-.726.548h-.703zm2.016-.525c0-.672-.396-.993-1.225-.993h-1.362v3.542h.579V9.093h.49l.996 1.571h.623l-1.019-1.571c.552 0 .918-.408.918-.978zm-11.5.598h-.051l.476-2.549h-3.384c-.109.628-.221 1.233-.322 1.812l-2.432 11.704h3.538l1.282-6.057c.445-2.184 1.662-4.413 4.174-4.413.447 0 .953.073 1.354.212l.74-3.44c-.418-.102-.901-.131-1.354-.131-1.641.006-3.382 1.395-4.021 2.862zM79.666 5.857c-1.908 0-3.895.812-4.794 2.564h-.056c-.183-1.629-1.849-2.564-3.464-2.564-1.67 0-3.229.73-4.183 2.119h-.051l.314-1.812h-3.303c-.08.424-.189.972-.293 1.498L61.35 19.678h3.545l1.406-6.428c.442-1.812 1.109-4.668 3.512-4.668.904 0 1.67.628 1.67 1.629 0 .811-.263 2.067-.45 2.885l-1.429 6.582h3.549l1.399-6.428c.45-1.834 1.056-4.668 3.522-4.668.9 0 1.662.628 1.662 1.629 0 .811-.264 2.075-.446 2.885l-1.433 6.582h3.557l1.414-6.449c.292-1.104.607-2.471.607-3.674.003-2.054-1.747-3.698-3.769-3.698zm-68.365.308L8.394 19.68h3.541l2.912-13.515h-3.546zm7.244 7.581c0-2.541 1.585-5.164 4.416-5.164.979 0 1.904.233 2.593.679l.872-2.885c-.952-.285-2.22-.52-3.545-.52-4.893 0-8.038 3.586-8.038 8.313 0 3.49 2.273 5.822 5.79 5.822 1.164 0 2.328-.111 3.412-.629l.399-2.783c-.926.438-2.014.68-2.882.68-2.438.011-3.017-1.759-3.017-3.513zM16.146.335h-3.544l-.743 3.368h3.544l.743-3.368zm30.107 5.522c-4.472 0-7.753 4.033-7.753 8.225 0 4.02 2.644 5.91 6.562 5.91 1.454 0 2.963-.344 4.336-.76l.446-2.783c-1.322.6-2.718.973-4.175.973-2.271 0-3.596-.797-3.765-2.922h-.003c-.008-.125-.019-.242-.019-.381 0-.021.004-.051.004-.072v-.037c.015-.92.22-1.84.575-2.682.677-1.715 1.644-2.907 3.734-2.907 1.483 0 2.249.811 2.249 2.258 0 .312-.025.598-.08.92h-4.849c-.315 1.059-.37 1.768-.378 2.408h8.35c.213-.992.348-1.992.348-3.016.002-3.431-2.221-5.134-5.582-5.134zm-6.017.308h-4.601l-4.947 4.91h-.058L32.988 0h-3.545l-4.204 19.68H28.7l1.538-7.158h.051l3.52 7.158h3.996l-4.102-7.35 6.533-6.165zm16.882 9.788c0-.533.08-.994.161-1.314l1.293-5.903h3.179l.557-2.57h-3.176l.876-4.01-3.81 1.234-.614 2.775h-2.56l-.561 2.57h2.566l-1 4.565c-.241 1.074-.453 2.098-.453 3.148 0 2.602 1.695 3.543 4.101 3.543.608 0 1.297-.182 1.905-.312l.607-2.732c-.45.189-1.08.322-1.721.322-.79.001-1.35-.513-1.35-1.316zm-52.46 0c0-.533.084-.994.157-1.314l1.297-5.903H9.29l.557-2.57H6.668l.875-4.01L3.735 3.39l-.612 2.776H.556L0 8.736h2.57l-1.006 4.565c-.238 1.072-.455 2.098-.455 3.148 0 2.6 1.696 3.543 4.106 3.543.607 0 1.296-.184 1.903-.314l.608-2.732c-.446.189-1.084.322-1.717.322-.794.002-1.351-.512-1.351-1.315z">                        
+                        </path>
+                    </svg>
+                  </a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <form class="w-25 mt-2" role="search">                      
+                    <input class="form-control me-2 search" type="search" placeholder="      Search for artist, event or venue" aria-label="Search">                  
+                  </form>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Concerts</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Sports</a>
+                      </li>                        
+                      <li class="nav-item">
+                        <a class="nav-link" href="">Arts & Theater</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="">Family</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="">VIP</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="">Deals</a>
+                      </li>
+                    </ul>            
+                  </div>                   
+                </div>
+                <div id="dropdown-menu">
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle dropbtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{first_name}}
+                      </a>
+                      <ul class="dropdown-menu dropdown-content">
+                        <li><a class="dropdown-item" href="#">My Account</a></li>
+                        <li><a class="dropdown-item" href="#">My Tickets</a></li>
+                        <li><a class="dropdown-item" href="#">My Listings</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Sell</a></li>
+                        <li><a class="dropdown-item" href="#">Learn About Verified Tickets</a></li>
+                        <li><a class="dropdown-item" href="{{url_for('auth.logout')}}">Sign Out</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="">Help</a>
+                    </li>                    
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </nav>  
+    
+    <!--Header Section for small screens-->
+    <nav id="display">
+      <div class="my-0 p-0">
+          <div id="navBar" class="head headTransparent px-0">
+            <div class="position-relative align-items-center">
+              <div class="back-arrow position-absolute text-white">
+                <i class="bi bi-chevron-left"></i>
+              </div>
+               <div class="head-sm text-center text-white">
+                <h4 class="fs-5">Event Details</h4>
+               </div> 
+            </div>
+          </div>
+      </div>
+    </nav>    
+    
+    <!--Main body-->
+    <section>
+      <div class="container">
+        <!--Page Navigation-->
+        <div id="breadcrumb" style="margin-top: 5rem;">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="account-overview.html">My Account</a></li>
+              <li class="breadcrumb-item"><a href="#">My Events</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Event Details</li>
+            </ol>
+          </nav>
+        </div>
 
-<div><h1>Success</h1></div>
-<!-- <form method="POST">
-  <h3 align="center">Login</h3>
-  <div class="form-group">
-    <label for="email">Email Address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email"
-      name="email"
-      placeholder="Enter email"
-    />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      name="password"
-      placeholder="Enter password"
-    />
-  </div>
-  <br />
-  <button type="submit" class="btn btn-primary">Login</button>
-</form> -->
-{% endblock %}
+        <div id="event-details">
+          <div id="hide" class="mb-4"><h1 class="fs-4 header">Event Details</h1></div>
+          <div class="d-flex d-flex-sm justify-content-between">
+            <div id="d-small" style="width: 30%;">
+              <div>
+                <div class="card">
+                  <img src="{{url_for('static', filename='img/morgan wallen.jpg') }}" class="card-img-top" alt="Morgan Wallen">
+                  <div class="card-body">
+                    <h5 class="card-title mb-4">
+                      <a href="#" class="text-link">Morgan Wallen: One Night At A Time World Tour</a>
+                    </h5>
+                    <div class="d-flex mb-3">
+                      <i class="bi bi-calendar4"></i>
+                      <p class="card-text ms-2">Fri • May 19 • 5:30 PM</p>
+                    </div>
+                    <div class="d-flex mb-3">
+                      <i class="bi bi-geo-alt"></i>
+                      <p class="card-text ms-2"><a href="#" style="text-decoration: none;">MetLife Stadium</a></p>
+                    </div>
+                    <div class="d-flex mb-5">
+                      <i class="bi bi-map"></i>
+                      <p class="card-text ms-2"><a href="#" style="text-decoration: none;">One MetLife Stadium, East Rutherford, NJ, 07073</a></p>
+                    </div>
+                    <div id="hide" class="d-flex justify-content-between border-top pt-4">
+                      <p class="card-text" style="font-size: 14px;">Share You're Going</p>
+                      <div class="d-flex justify-content-between w-30">
+                        <span class="w-30"><i class="bi bi-facebook"></i></span>
+                        <span class="w-30"><i class="bi bi-twitter"></i></span>
+                        <span class="w-30"><i class="bi bi-envelope"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="hide" class="my-3">
+                <div class="card py-2">
+                  <div class="card-body">
+                    <h5 class="card-title">Need Help With Your Order?</h5>                    
+                    <p class="card-text">Use Chat to quickly find the answers you need.</p>                    
+                    <a href="#" class="btn botn-primary">Contact Us <i class="bi bi-chat-left-dots"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-5 w-22" style="width: 66%;">
+              <div id="tickets">
+                <div class="card card-tickets mb-5">
+                  <div class="card-body">
+                    <h5 class="card-title" style="color: #904eba;">When you can get your tickets</h5>                    
+                    <div class="d-flex">
+                      <i class="bi bi-ticket"></i>
+                      <p class="ms-2">Your tickets will be ready prior to event - anytime after 5:30pm on Tue, May 16, 2023 (we'll email you a reminder when they're ready).</p>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              <div id="action" class="mb-5">
+                <div class="card">
+                  <div id="card-head" class="card-header p-0 m-0" style="background-color: rgb(255, 255, 255);">
+                    <ul class="nav nav-pills card-header-pills position-relative">
+                      <li class="nav-item">
+                        <div class="border-end text-center">
+                          <i class="bi bi-send"></i>
+                          <a class="nav-link" href="#">Transfer Tickets</a>
+                        </div>
+                      </li>
+                      <li class="nav-item">
+                        <div class="border-end text-center border-none">
+                          <i class="bi bi-arrow-repeat"></i>
+                          <a class="nav-link" href="#">Sell Tickets</a>
+                        </div>
+                      </li>
+                      <li class="nav-item" id="hide">
+                        <a class="btn rounded-pill btn-tickets" href="#" role="button">
+                          <i class="bi bi-info-circle-fill me-2"></i>Why Can't I Sell My Tickets?</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body px-4">
+                    <div class="d-flex justify-content-between py-3">
+                      <h5 class="card-title h5-sm">My SafeTix™ (3)</h5>
+                      <span class="map d-flex">
+                        <i class="bi bi-geo-alt"></i>
+                        <a href="#" style="text-decoration: none;"><p class="ms-3">View Map</p></a>
+                      </span>
+                    </div>
+                    <div id="card-sm" class="card mb-5">
+                      <div class="card-body">
+                        Sec 126, Row 26, Seat 27
+                      </div>
+                      <div>
+                        <div class="card-body">
+                          Sec 126, Row 26, Seat 27
+                        </div>
+                      </div>
+                      <div>
+                        <div class="card-body">
+                          Sec 126, Row 26, Seat 27
+                        </div>
+                      </div>
+                    </div>
+                    <p class="card-text my-3">Can't find something you've purchased? Check your order confirmation email or 
+                       <a href="#">View Your Orders</a>.
+                    </p>                    
+                  </div>
+                </div>
+              </div>
+              <div id="sponsors" class="mb-5">
+                <div class="card px-4 pt-3">
+                  <div class="card-body">
+                    <h5 class="card-title mb-4">An Exclusive Offer From Our Sponsors</h5>
+                    <div class="card">
+                      <div class="card-body d-flex justify-content-between">
+                        <div class="w-30 w-22 mb-sm align-self-center me-3">
+                          <img src="{{url_for('static', filename='img/capital-one.png') }}" class="img-fluid" alt="Capital One Shopping">
+                        </div>
+                        <div class="w-75 w-22 me-3">
+                          <p>
+                            Avoid paying full price with Capital One Shopping.
+                            It can find you coupons instantly! Simply add it to your browser, and shop like normal. This free tool does the work for you.
+                            <a href="">Terms & Conditions</a> 
+                          </p>
+                        </div>
+                        <div class="w-30 w-22 align-self-center" id="button">
+                          <a class="btn botn-primary" href="#" role="button">Get Free Coupons</a>
+                        </div>                        
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-2 small">
+                      <p>Powered by <a href="">Rokt</a> 
+                        - <a href="">Privacy Policy</a>.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="column" class="mb-5">
+                <div class="border-bottom mb-4">
+                  <div class="w-50 w-20 pb-3 ms-2">
+                    <div class="row align-items-start">
+                      <div class="col">
+                        Ticket Delivery
+                      </div>
+                      <div class="col">
+                        Go Mobile 
+                      </div>                    
+                    </div>
+                  </div>
+                </div>
+                <div class="border-bottom">
+                  <div class="w-50 w-20 pb-3 ms-2">
+                    <div class="row align-items-start">
+                      <div class="col">
+                        Order #
+                      </div>
+                      <div class="col">
+                        1-16671/NY1 <a href="#">View Receipt</a>
+                      </div>                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div>
+      <div class="chatButtonWrapper">
+        <button type="button" class="btn msg-btn rounded-circle">
+          <i class="bi bi-chat-left-dots-fill"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!--Footer section-->
+    <footer>
+      <div id="hide" class="footer">
+        <div class="container-fluid">
+          <div class="">
+            <div class="px-5 text-white">
+              <div class="pb-5 border-bottom">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h4 class="mb-4">Helpful Links</h4>
+                    <div>
+                      <ul>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master help page">Help/FAQ</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Tickets sell page">Sell</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master user account page">My Account</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master contact us page">Contact Us</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master gift cards page">Gift Cards</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master payment refunds and exchange">Refunds and Exchanges</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master payment brokers">N.Y. Registered Brokers</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master privacy">Do Not Sell or Share My Personal Information</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <h4 class="mb-4">Our Network</h4>
+                    <div>
+                      <ul>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master help page">Live Nation</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Tickets sell page">House of Blues</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master user account page">Front Gate Tickets</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master contact us page">TicketWeb</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master gift cards page">universe</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master payment refunds and exchange">NFL</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master payment brokers">NBA</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master privacy">NHL</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <h4 class="mb-4">About Us</h4>
+                    <div>
+                      <ul>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master help page">Who We Are</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Tickets sell page">Ticketmaster Blog</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master user account page">Ticketing 101</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master contact us page">Privacy Policy</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master gift cards page">Careers</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master payment refunds and exchange">Ticket Your Event</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master payment brokers">Innovation</a>
+                        </li>                      
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <h4 class="mb-4">Friends & Partners</h4>
+                    <div>
+                      <ul>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master help page">American Express</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Tickets sell page">Allianz</a>
+                        </li>
+                        <li class="nav-link mb-2">
+                          <a href="" alt="Ticket master user account page">AWS</a>
+                        </li>                      
+                        <li class="nav-link">
+                          <div class="d-flex mt-5">
+                            <p class="me-3">Get Our App</p>
+                            <i class="bi bi-apple me-2"></i>
+                            <i class="bi bi-google-play me-2"></i>
+                          </div>
+                        </li>                                          
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-5">
+                <div class="row align-items-start">
+                  <div class="col-2">
+                    <a href="" class="navbar-brand">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="150" height="20" class="injected-svg logo-svg" data-src="/assets/tm-logo-header.623a820a.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <path d="M125.552 5.857c-4.467 0-7.747 4.033-7.747 8.225 0 4.02 2.644 5.91 6.562 5.91 1.45 0 2.958-.344 4.327-.76l.455-2.783c-1.326.6-2.727.973-4.176.973-2.264 0-3.597-.797-3.765-2.922 0-.125-.015-.242-.015-.381v-.072-.037c.015-.92.211-1.84.57-2.682.682-1.715 1.647-2.907 3.742-2.907 1.473 0 2.241.811 2.241 2.258a5.7 5.7 0 01-.08.92h-4.851c-.313 1.059-.373 1.768-.373 2.408h8.351c.205-.992.345-1.992.345-3.016-.005-3.431-2.224-5.134-5.586-5.134zm-11.895 10.096c0-.533.088-.994.161-1.314l1.295-5.903h3.181l.549-2.57h-3.179l.879-4.01-3.809 1.234-.607 2.775h-2.57l-.551 2.57h2.562l-1.002 4.565c-.241 1.074-.455 2.098-.455 3.148 0 2.602 1.693 3.543 4.096 3.543.613 0 1.296-.182 1.911-.312l.616-2.732c-.455.189-1.1.322-1.723.322-.804.001-1.354-.513-1.354-1.316zm-14.809-5.801c0 3.383 4.601 3.594 4.601 5.772 0 1.096-1.245 1.498-2.439 1.498-1.376 0-2.38-.506-3.384-1.053l-.775 2.812c1.305.6 2.725.811 4.159.811 3.04 0 6.138-1.053 6.138-4.572 0-3.295-4.599-3.93-4.599-5.632 0-1.074 1.317-1.366 2.38-1.366 1.004 0 1.979.292 2.358.497l.776-2.651c-.703-.176-2.029-.416-3.326-.416-2.799.005-5.889 1.13-5.889 4.3zm48.113 1.315c-1.413 0-2.477-1.125-2.477-2.571 0-1.453 1.062-2.57 2.477-2.57 1.398 0 2.453 1.117 2.453 2.57 0 1.446-1.055 2.571-2.453 2.571zm-.016-5.594c-1.678 0-3.047 1.352-3.047 3.023 0 1.659 1.369 3.018 3.047 3.018 1.686 0 3.055-1.359 3.055-3.018 0-1.672-1.369-3.023-3.055-3.023zM89.004 17.43c-.9 0-1.794-.469-1.794-1.41 0-2.279 2.854-2.57 4.577-2.57h1.246c-.556 2.175-1.379 3.98-4.029 3.98zm2.469-11.564c-1.59 0-3.119.284-4.636.811l-.499 2.812c1.398-.658 2.907-1.052 4.469-1.052 1.244 0 2.717.394 2.717 1.752 0 .395 0 .79-.103 1.155h-1.237c-3.332 0-8.365.352-8.365 4.807 0 2.482 1.752 3.85 4.213 3.85 1.955 0 3.179-.854 4.387-2.381h.059l-.373 2.066h2.987c.315-2.541 1.671-7.846 1.671-9.649-.001-3.178-2.566-4.171-5.29-4.171zm54.886 2.774V7.566h.703c.367 0 .726.125.726.526 0 .46-.278.548-.726.548h-.703zm2.016-.525c0-.672-.396-.993-1.225-.993h-1.362v3.542h.579V9.093h.49l.996 1.571h.623l-1.019-1.571c.552 0 .918-.408.918-.978zm-11.5.598h-.051l.476-2.549h-3.384c-.109.628-.221 1.233-.322 1.812l-2.432 11.704h3.538l1.282-6.057c.445-2.184 1.662-4.413 4.174-4.413.447 0 .953.073 1.354.212l.74-3.44c-.418-.102-.901-.131-1.354-.131-1.641.006-3.382 1.395-4.021 2.862zM79.666 5.857c-1.908 0-3.895.812-4.794 2.564h-.056c-.183-1.629-1.849-2.564-3.464-2.564-1.67 0-3.229.73-4.183 2.119h-.051l.314-1.812h-3.303c-.08.424-.189.972-.293 1.498L61.35 19.678h3.545l1.406-6.428c.442-1.812 1.109-4.668 3.512-4.668.904 0 1.67.628 1.67 1.629 0 .811-.263 2.067-.45 2.885l-1.429 6.582h3.549l1.399-6.428c.45-1.834 1.056-4.668 3.522-4.668.9 0 1.662.628 1.662 1.629 0 .811-.264 2.075-.446 2.885l-1.433 6.582h3.557l1.414-6.449c.292-1.104.607-2.471.607-3.674.003-2.054-1.747-3.698-3.769-3.698zm-68.365.308L8.394 19.68h3.541l2.912-13.515h-3.546zm7.244 7.581c0-2.541 1.585-5.164 4.416-5.164.979 0 1.904.233 2.593.679l.872-2.885c-.952-.285-2.22-.52-3.545-.52-4.893 0-8.038 3.586-8.038 8.313 0 3.49 2.273 5.822 5.79 5.822 1.164 0 2.328-.111 3.412-.629l.399-2.783c-.926.438-2.014.68-2.882.68-2.438.011-3.017-1.759-3.017-3.513zM16.146.335h-3.544l-.743 3.368h3.544l.743-3.368zm30.107 5.522c-4.472 0-7.753 4.033-7.753 8.225 0 4.02 2.644 5.91 6.562 5.91 1.454 0 2.963-.344 4.336-.76l.446-2.783c-1.322.6-2.718.973-4.175.973-2.271 0-3.596-.797-3.765-2.922h-.003c-.008-.125-.019-.242-.019-.381 0-.021.004-.051.004-.072v-.037c.015-.92.22-1.84.575-2.682.677-1.715 1.644-2.907 3.734-2.907 1.483 0 2.249.811 2.249 2.258 0 .312-.025.598-.08.92h-4.849c-.315 1.059-.37 1.768-.378 2.408h8.35c.213-.992.348-1.992.348-3.016.002-3.431-2.221-5.134-5.582-5.134zm-6.017.308h-4.601l-4.947 4.91h-.058L32.988 0h-3.545l-4.204 19.68H28.7l1.538-7.158h.051l3.52 7.158h3.996l-4.102-7.35 6.533-6.165zm16.882 9.788c0-.533.08-.994.161-1.314l1.293-5.903h3.179l.557-2.57h-3.176l.876-4.01-3.81 1.234-.614 2.775h-2.56l-.561 2.57h2.566l-1 4.565c-.241 1.074-.453 2.098-.453 3.148 0 2.602 1.695 3.543 4.101 3.543.608 0 1.297-.182 1.905-.312l.607-2.732c-.45.189-1.08.322-1.721.322-.79.001-1.35-.513-1.35-1.316zm-52.46 0c0-.533.084-.994.157-1.314l1.297-5.903H9.29l.557-2.57H6.668l.875-4.01L3.735 3.39l-.612 2.776H.556L0 8.736h2.57l-1.006 4.565c-.238 1.072-.455 2.098-.455 3.148 0 2.6 1.696 3.543 4.106 3.543.607 0 1.296-.184 1.903-.314l.608-2.732c-.446.189-1.084.322-1.717.322-.794.002-1.351-.512-1.351-1.315z">                        
+                          </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="col-6">
+                    <p>
+                      By continuing past this page, you agree to our Terms of Use.
+                      <a href="" style="color: #026CDF;">Manage my cookies</a> 
+                    </p>
+                  </div>
+                  <div class="col-2">
+                    <p>© Ticketmaster. 2023</p>
+                  </div>
+                  <div class="col-2">
+                    <div class="d-flex justify-content-between">
+                      <a href="https://www.facebook.com/Ticketmaster" class="sc-dOkuiw kjQejX"><svg viewBox="0 0 7 14" width="18" height="18" fill="currentcolor"><path d="M6.418 4.38H4.232V2.978c0-.528.357-.65.608-.65h1.543V.007L4.258 0C1.9 0 1.364 1.73 1.364 2.836V4.38H0V6.77h1.364v6.76h2.868V6.77h1.936l.25-2.39z"></path></svg>
+                      </a>
+                      <a href="https://www.instagram.com/ticketmaster/?hl=en" class="sc-dOkuiw kjQejX"><svg viewBox="0 0 16 16" width="17" height="17" fill="currentcolor"><path d="M8 1c1.901 0 2.14.008 2.886.042.745.034 1.254.152 1.7.326.46.178.85.418 1.24.807.388.389.628.78.807 1.24.173.445.29.954.325 1.699.034.747.042.985.042 2.886 0 1.901-.008 2.14-.042 2.886-.034.745-.152 1.254-.325 1.7-.18.46-.419.85-.808 1.24-.389.388-.78.628-1.24.807-.445.173-.954.29-1.699.325C10.14 14.992 9.901 15 8 15c-1.901 0-2.14-.008-2.886-.042-.745-.034-1.254-.152-1.7-.325a3.432 3.432 0 0 1-1.24-.808c-.388-.389-.628-.78-.806-1.24-.174-.445-.292-.954-.326-1.699C1.008 10.14 1 9.901 1 8c0-1.901.008-2.14.042-2.886.034-.745.152-1.254.326-1.7.178-.46.418-.85.807-1.24.389-.388.78-.628 1.24-.806.445-.174.954-.292 1.699-.326C5.86 1.008 6.099 1 8 1zm-.043 9.389a2.346 2.346 0 1 1 0-4.692 2.346 2.346 0 0 1 0 4.692zm0-5.96a3.614 3.614 0 1 0 0 7.228 3.614 3.614 0 0 0 0-7.228zm4.608-.136a.858.858 0 1 0-1.717 0 .858.858 0 0 0 1.717 0z"></path></svg>
+                      </a>
+                      <a href="https://twitter.com/ticketmaster" class="sc-dOkuiw kjQejX"><svg viewBox="0 0 14 12" width="17" height="17" fill="currentcolor"><path d="M14 1.353a5.704 5.704 0 0 1-1.65.454A2.89 2.89 0 0 0 13.613.211c-.555.33-1.17.57-1.824.7A2.862 2.862 0 0 0 9.693 0 2.879 2.879 0 0 0 6.82 2.885c0 .226.025.446.074.657A8.141 8.141 0 0 1 .975.528a2.881 2.881 0 0 0-.39 1.45c0 1.001.508 1.884 1.279 2.402a2.852 2.852 0 0 1-1.301-.361v.037c0 1.397.99 2.563 2.304 2.828a2.87 2.87 0 0 1-1.298.05 2.877 2.877 0 0 0 2.683 2.003A5.746 5.746 0 0 1 0 10.132a8.103 8.103 0 0 0 4.403 1.297c5.283 0 8.172-4.397 8.172-8.21 0-.124-.002-.249-.008-.373A5.846 5.846 0 0 0 14 1.353z"></path></svg>
+                      </a>
+                      <a href="https://www.youtube.com/ticketmaster" class="sc-dOkuiw kjQejX"><svg viewBox="0 0 17 12" width="16" height="16" fill="currentcolor"><path d="M6.761 8.464V3.44l4.444 2.512L6.76 8.464zm9.884-6.605A2.13 2.13 0 0 0 15.142.355C13.816 0 8.5 0 8.5 0S3.184 0 1.858.355A2.13 2.13 0 0 0 .355 1.86C0 3.185 0 5.952 0 5.952s0 2.767.355 4.093a2.13 2.13 0 0 0 1.503 1.504c1.326.355 6.642.355 6.642.355s5.316 0 6.642-.355a2.13 2.13 0 0 0 1.503-1.504C17 8.72 17 5.952 17 5.952s0-2.767-.355-4.093z"></path></svg>
+                      </a>
+                      <a href="https://www.linkedin.com/company/ticketmaster/" class="sc-dOkuiw kjQejX"><svg viewBox="0 0 19 18" width="18" height="18" fill="rgba(255, 255, 255, 1)"><path d="M14.78 5.917c-3.138 0-3.559 1.887-3.559 1.887l.004-1.874H6.99v11.648h4.236v-6.353s0-2.133 1.8-2.133c1.013 0 1.378.947 1.378 2.133v6.353h4.234v-6.353c0-3.315-1.441-5.308-3.857-5.308zM.637 17.577h4.219V5.918H.636v11.66zM2.747.638c-1.166 0-2.11.949-2.11 2.12 0 1.171.944 2.12 2.11 2.12 1.164 0 2.109-.949 2.109-2.12 0-1.171-.945-2.12-2.11-2.12z"></path></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!--Footer section for mobile-->
+    <div id="display" class="footer-sm">
+      <div>
+        <p class="text-footer-sm">
+          By continuing past this page, you agree to our 
+          <span class="text-white">Terms of Use.</span>
+          <a href="#">Manage my cookies</a>
+        </p>
+      </div>
+      <div>
+        <p class="text-footer-sm mb-0"><span><a href="" class="text-white">Privacy Policy </a></span>   
+          | 1999-2023 Ticketmaster. All rights reserved.       
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

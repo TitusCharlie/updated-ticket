@@ -2,7 +2,7 @@ from flask import Flask
 # from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
 import mysql.connector
-from flask_mail import Mail
+from flask_mail import Mail, Message
 from os import path
 from flask_login import LoginManager
 
@@ -12,13 +12,35 @@ from flask_login import LoginManager
 app = Flask(__name__)
 
 def create_app():
-    
+    # database connection
     app.secret_key = 'ticket selling site'
 
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = ''
     app.config['MYSQL_DB'] = 'crud'
+
+    #mailing system
+
+    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USE_SSL'] = True
+    app.config['MAIL_USERNAME'] = 'reviewreen@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'your-email-password'
+    app.config['DEBUG'] = True
+    app.config['TESTING'] = False
+    # app.config['app_SERVER'] = 'localhost'
+    # app.config['app_PORT'] = 25
+    # app.config['app_USE_TLS'] = False 
+    # app.config['app_USE_SSL'] = False 
+    # app.config['app_DEBUG'] = True
+    # app.config['app_USERNAME'] = 'ticketme'
+    # app.config['app_PASSWORD'] = ''
+    # app.config['app_DEFAULT_SENDER'] = None
+    # app.config['app_MAX_EappS'] = 5
+    # app.config['app_SUPRESS_SEND'] = False
+    # app.config['app_ASCII_ATTACHMENTS'] = False
+    Mail(app)
 
     
     mydb =mysql.connector.connect(
@@ -49,7 +71,6 @@ def create_app():
 #     app.config['app_ASCII_ATTACHMENTS'] = False
 
 
-#     mail = Mail(app)
 
 
 
@@ -59,10 +80,12 @@ def create_app():
     from .views import views
     from .auth import auth
     from .backend import backend
+    from .email import email
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(backend, url_prefix='/admin')
+    app.register_blueprint(email, url_prefix='/')
 
     # from .models import User, Note
     

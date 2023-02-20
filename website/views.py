@@ -17,20 +17,35 @@ mycursor = mydb.cursor()
 
 
 @views.route('/index', methods=['POST'])
+# @login_required
 def index():
     if request.method == 'POST':
         email = request.form['email']
         first_name = request.form['firstName']
         last_name = request.form['lastName']
-        
+        # password = request.form['password']
 
-        print(email, first_name, last_name)
-        print(request.form)
-    return render_template('index.html')
+        cur = mydb.cursor()
+            
+        sql = "INSERT INTO accounts (name, email, password) VALUES (%s, %s, %s)"
+        val = (first_name, email, last_name)
+
+        cur.execute(sql, val)
+            # print(table)
+        mydb.commit()
+            # login_user(new_user, remember=True)
+        # flash('Account created!', category='success')
+        #email section
+        return {{'email.send_email'}}
+
+
+        # print(email, first_name, last_name)
+        # print(request.form)
+    return render_template('index.html',  first_name=first_name)
 
 
 @views.route('/', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def home():
      
     if request.method == 'POST': 
@@ -47,7 +62,7 @@ def home():
             mycursor.commit()
             flash('Note added!', category='success')
 
-    return render_template("home.html", user=(current_user))
+    return render_template("email.html", user=(current_user))
 
 
 # @views.route('/delete-note', methods=['POST'])
@@ -61,3 +76,4 @@ def home():
 #             mycursor.commit()
 
 #     return jsonify({})
+
